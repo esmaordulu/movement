@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".exercise.view.ExerciseDetailFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_exercise_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel_training"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/cancel_training"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:text="@string/add_favorite"
+        android:id="@+id/btn_add_favorite"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

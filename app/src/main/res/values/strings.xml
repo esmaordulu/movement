@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Movement</string>
+    <string name="cancel_training">Cancel training</string>
+    <string name="add_favorite">Add favorite</string>
+    <string name="remove_favorite">Remove favorite</string>
+    <string name="general_ok">OK</string>
+    <string name="general_error">Something went wrong.</string>
+    <string name="exercise_list_title">Exercises</string>
+    <string name="exercise_detail_title">Exercise</string>
+</resources>
