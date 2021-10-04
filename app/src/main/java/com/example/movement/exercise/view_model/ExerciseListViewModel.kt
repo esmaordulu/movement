@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.movement.R
 import com.example.movement.exercise.model.Exercise
-import com.example.movement.exercise.use_case.AddFavoriteUseCase
-import com.example.movement.exercise.use_case.GetExerciseUseCase
-import com.example.movement.exercise.use_case.RemoveFavoriteUseCase
-import com.example.movement.exercise.use_case.SaveSlideExerciseUseCase
+import com.example.movement.exercise.use_case.*
 import com.example.movement.shared.view.BaseViewModel
 import com.example.movement.shared.view.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +19,8 @@ class ExerciseListViewModel @Inject constructor(
     private val getExerciseUseCase: GetExerciseUseCase,
     private val addFavoriteUseCase: AddFavoriteUseCase,
     private val removeFavoriteUseCase: RemoveFavoriteUseCase,
-    private val saveSlideExerciseUseCase: SaveSlideExerciseUseCase
+    private val saveSlideExerciseUseCase: SaveSlideExerciseUseCase,
+    private val removeSlideExerciseUseCase: RemoveSlideExerciseUseCase
 )  : BaseViewModel() {
 
     val exerciseList: MutableLiveData<List<Exercise>> = MutableLiveData()
@@ -72,6 +70,13 @@ class ExerciseListViewModel @Inject constructor(
                         navigateToDetail.value = Event(true)
                     }
             }
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.launch {
+            removeSlideExerciseUseCase.removeSlideExercise()
         }
     }
 }

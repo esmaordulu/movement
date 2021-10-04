@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movement.R
@@ -13,6 +14,7 @@ import com.example.movement.exercise.model.Exercise
 import com.example.movement.exercise.view_model.ExerciseListViewModel
 import com.example.movement.shared.view.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ExerciseListFragment : BaseFragment(), ExerciseAdapter.ExerciseListener {

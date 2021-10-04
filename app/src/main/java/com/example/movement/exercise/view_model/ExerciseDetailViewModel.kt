@@ -6,7 +6,6 @@ import com.example.movement.exercise.model.Exercise
 import com.example.movement.exercise.use_case.AddFavoriteUseCase
 import com.example.movement.exercise.use_case.GetSlideExerciseUseCase
 import com.example.movement.exercise.use_case.RemoveFavoriteUseCase
-import com.example.movement.exercise.use_case.RemoveSlideExerciseUseCase
 import com.example.movement.shared.Config
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -17,21 +16,18 @@ import javax.inject.Inject
 class ExerciseDetailViewModel @Inject constructor(
     private val getSlideExerciseUseCase: GetSlideExerciseUseCase,
     private val addFavoriteUseCase: AddFavoriteUseCase,
-    private val removeFavoriteUseCase: RemoveFavoriteUseCase,
-    private val removeSlideExerciseUseCase: RemoveSlideExerciseUseCase
-) : ViewModel() {
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase
+    ) : ViewModel() {
 
-    private var index: Int
+    private var index: Int = -1
     private lateinit var slideList: List<Exercise>
     val exercise: MutableLiveData<Exercise> = MutableLiveData()
     val finish: MutableLiveData<Boolean> = MutableLiveData()
 
-    var timerStarted = false
     private lateinit var timer: CountDownTimer
 
     init {
         start()
-        index = -1
     }
 
     private fun start() {
@@ -39,10 +35,7 @@ class ExerciseDetailViewModel @Inject constructor(
             getSlideExerciseUseCase.getSlideExercises()
                 .collect {
                     slideList = it
-                    if (!timerStarted) {
-                        startTimer()
-                        timerStarted = true
-                    }
+                    startTimer()
                 }
         }
     }
@@ -60,7 +53,6 @@ class ExerciseDetailViewModel @Inject constructor(
             }
 
             override fun onFinish() {
-                timerStarted = false
                 cancelTraining()
             }
         }
@@ -97,9 +89,8 @@ class ExerciseDetailViewModel @Inject constructor(
         finish.value = true
     }
 
-    fun destroyView() {
-        viewModelScope.launch {
-            removeSlideExerciseUseCase.removeSlideExercise()
-        }
+    override fun onCleared() {
+        super.onCleared()
+        timer.cancel()
     }
 }

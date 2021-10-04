@@ -59,9 +59,4 @@ class ExerciseDetailFragment : Fragment() {
             viewModel.cancelTraining()
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.destroyView()
-    }
 }
