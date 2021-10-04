@@ -9,6 +9,7 @@ import com.example.movement.exercise.use_case.RemoveFavoriteUseCase
 import com.example.movement.shared.Config
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,11 +33,8 @@ class ExerciseDetailViewModel @Inject constructor(
 
     private fun start() {
         viewModelScope.launch {
-            getSlideExerciseUseCase.getSlideExercises()
-                .collect {
-                    slideList = it
-                    startTimer()
-                }
+            slideList = getSlideExerciseUseCase.getSlideExercises().first()
+            startTimer()
         }
     }
 
